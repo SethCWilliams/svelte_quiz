@@ -3,9 +3,8 @@
 </script>
 
 <main>
-  <h1>Hello World</h1>
-  <h4>I'm an h4</h4>
-  <Quiz quizName="New Quiz" />
+  <h1>I'm a Quiz</h1>
+  <Quiz />
 </main>
 
 <!-- <style>
@@ -29,9 +28,3 @@
     }
   }
 </main> -->
-
-<style>
-  :global(h4) {
-    color: green;
-  }
-</style>
