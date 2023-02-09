@@ -1,4 +1,5 @@
 <script>
+  import { fade, blur, fly, slide, scale } from "svelte/transition";
   import Question from "./Question.svelte";
 
   let quiz = getQuiz();
@@ -39,8 +40,16 @@
     {#each data.results as question, index}
       <!-- index isn't a keyword - second parameter keeps count -->
       {#if index == activeQuestion}
-        <Question {nextQuestion} {incrementScore} {question} />
+        <div in:fly={{ x: 100 }} out:fly={{ x: -200 }} class="fly-wrapper">
+          <Question {nextQuestion} {incrementScore} {question} />
+        </div>
       {/if}
     {/each}
   {/await}
 </div>
+
+<style>
+  .fly-wrapper {
+    position: absolute;
+  }
+</style>
