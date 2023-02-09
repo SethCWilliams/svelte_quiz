@@ -4,6 +4,7 @@
   export let incrementScore;
   let isCorrect;
   let isAnswered = false;
+  let answer = question.correct_answer;
   let answers = question.incorrect_answers.map((answer) => {
     return {
       answer,
@@ -39,7 +40,7 @@
     {#if isCorrect}
       You got it right
     {:else}
-      You goofed up
+      You goofed up. The answer is {answer}
     {/if}
   </h5>
 {/if}

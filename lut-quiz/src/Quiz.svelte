@@ -18,21 +18,28 @@
     quiz = getQuiz();
   }
 
+  function nextQuestion() {
+    activeQuestion = activeQuestion + 1;
+  }
+
   function incrementScore() {
     score++;
   }
 
-  function nextQuestion() {
-    activeQuestion = activeQuestion + 1;
-    console.log(activeQuestion);
+  // Reactive Statement
+  $: if (score > 6) {
+    alert("You Won!");
+    resetQuiz();
   }
+  // Reactive Declaration
+  $: questionNumber = activeQuestion + 1;
 </script>
 
 <div>
   <button on:click={resetQuiz}> Start New Quiz </button>
 
   <h3>My Score: {score}</h3>
-  <h4>Question #{activeQuestion + 1}</h4>
+  <h4>Question #{questionNumber}</h4>
 
   {#await quiz}
     Loading...
