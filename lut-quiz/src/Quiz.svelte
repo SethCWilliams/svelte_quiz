@@ -1,10 +1,24 @@
 <script>
   import { fade, blur, fly, slide, scale } from "svelte/transition";
+  import { onMount, beforeUpdate, afterUpdate, onDestroy } from "svelte";
   import Question from "./Question.svelte";
+  import Modal from "./Modal.svelte";
 
   let quiz = getQuiz();
   let activeQuestion = 0;
   let score = 0;
+  let isModalOpen = false;
+
+  // component based life cycle methods
+  onMount(() => {
+    console.log("i mounted");
+  });
+  afterUpdate(() => {
+    console.log("after update");
+  });
+  beforeUpdate(() => {
+    console.log("before update");
+  });
 
   async function getQuiz() {
     const res = await fetch("https://opentdb.com/api.php?amount=10");
@@ -15,6 +29,7 @@
   function resetQuiz() {
     score = 0;
     activeQuestion = 0;
+    isModalOpen = false;
     quiz = getQuiz();
   }
 
@@ -27,15 +42,15 @@
   }
 
   // Reactive Statement
-  $: if (score > 6) {
-    alert("You Won!");
-    resetQuiz();
+  $: if (score > 2) {
+    isModalOpen = true;
   }
   // Reactive Declaration
   $: questionNumber = activeQuestion + 1;
 </script>
 
 <div>
+  <!--could use on:click | once to make it so the button can be clicked once per mount-->
   <button on:click={resetQuiz}> Start New Quiz </button>
 
   <h3>My Score: {score}</h3>
@@ -54,6 +69,14 @@
     {/each}
   {/await}
 </div>
+
+{#if isModalOpen}
+  <Modal>
+    <h2>You Won!</h2>
+    <p>Congratulations!</p>
+    <button on:click={resetQuiz}>Start New Quiz</button>
+  </Modal>
+{/if}
 
 <style>
   .fly-wrapper {
