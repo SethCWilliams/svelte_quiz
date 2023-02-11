@@ -1,7 +1,7 @@
 <script>
+  import { score } from "./stores.js";
   export let nextQuestion;
   export let question;
-  export let incrementScore;
 
   // bool values for monitoring status
   let isCorrect;
@@ -31,7 +31,7 @@
       isAnswered = true;
       isCorrect = answer.correct;
       if (answer.correct) {
-        incrementScore();
+        score.update((n) => n + 1);
       }
     }
   }
@@ -40,9 +40,11 @@
 <h3>{@html question.question}</h3>
 
 {#each allAnswers as answer}
+  <!-- <div> -->
   <button disabled={isAnswered} on:click={() => checkQuestion(answer)}>
     {@html answer.answer}
   </button>
+  <!-- </div> -->
 {/each}
 {#if isAnswered}
   <h5 class:isCorrect class:wrong={!isCorrect}>
@@ -66,5 +68,10 @@
   }
   .isCorrect {
     color: green;
+  }
+  button {
+    display: block;
+    margin: 5px;
+    border-radius: 15px;
   }
 </style>
