@@ -1,10 +1,20 @@
 <script>
   import { fade, blur, fly, slide, scale } from "svelte/transition";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <div transition:fade={{ x: 100 }} class="modal-bg">
   <div transition:fly={{ y: 100 }} class="modal">
-    <button> Close </button>
+    <button
+      on:click={() => {
+        // dispatch will fire off an event to a parent component
+        dispatch("close");
+      }}
+    >
+      Close
+    </button>
     <slot />
     <!-- <slot>optional fallback</slot> -->
   </div>

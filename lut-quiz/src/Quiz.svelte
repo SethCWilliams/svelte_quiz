@@ -71,7 +71,8 @@
 </div>
 
 {#if isModalOpen}
-  <Modal>
+  <!-- Modal has an 'on:close' event. close will be passed from dispatch in child component -->
+  <Modal on:close={resetQuiz}>
     <h2>You Won!</h2>
     <p>Congratulations!</p>
     <button on:click={resetQuiz}>Start New Quiz</button>
