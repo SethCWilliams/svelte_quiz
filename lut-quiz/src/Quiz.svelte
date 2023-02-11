@@ -42,7 +42,7 @@
   }
 
   // Reactive Statement
-  $: if (score > 2) {
+  $: if (score > 0) {
     isModalOpen = true;
   }
   // Reactive Declaration
