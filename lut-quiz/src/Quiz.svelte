@@ -6,6 +6,7 @@
   import { score } from "./stores.js";
 
   let quiz = getQuiz();
+  console.log(quiz);
   let activeQuestion = 0;
   let isModalOpen = false;
 
@@ -58,7 +59,11 @@
     {#each data.results as question, index}
       <!-- index isn't a keyword - second parameter keeps count -->
       {#if index == activeQuestion}
-        <div in:fly={{ x: 100 }} out:fly={{ x: -200 }} class="fly-wrapper">
+        <div
+          in:fly={{ x: 100, delay: 500 }}
+          out:fly={{ x: -200 }}
+          class="fly-wrapper"
+        >
           <Question {nextQuestion} {question} />
         </div>
       {/if}
@@ -76,10 +81,6 @@
 {/if}
 
 <style>
-  .fly-wrapper {
-    position: absolute;
-  }
-
   button {
     border-radius: 15px;
   }

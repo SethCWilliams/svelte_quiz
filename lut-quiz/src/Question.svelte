@@ -38,12 +38,13 @@
 </script>
 
 <h3>{@html question.question}</h3>
-
 {#each allAnswers as answer}
   <!-- <div> -->
-  <button disabled={isAnswered} on:click={() => checkQuestion(answer)}>
-    {@html answer.answer}
-  </button>
+  <div class="button_wrapper">
+    <button disabled={isAnswered} on:click={() => checkQuestion(answer)}>
+      {@html answer.answer}
+    </button>
+  </div>
   <!-- </div> -->
 {/each}
 {#if isAnswered}
@@ -57,7 +58,7 @@
 {/if}
 
 {#if isAnswered}
-  <div>
+  <div class="button_wrapper">
     <button on:click={nextQuestion}> Next Question </button>
   </div>
 {/if}
@@ -69,8 +70,18 @@
   .isCorrect {
     color: green;
   }
+  .button_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   button {
     display: block;
+    text-align: center;
+    min-width: 100px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
     margin: 5px;
     border-radius: 15px;
   }
